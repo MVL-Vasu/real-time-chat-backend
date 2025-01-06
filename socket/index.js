@@ -42,6 +42,7 @@ io.on("connection", async (socket) => {
      io.emit("onlineUser", Array.from(onlineUser));
 
      socket.on("message-page", async (userId) => {
+
           const userDetails = await Users.findById(userId).select("-password");
 
           const payload = {
@@ -71,8 +72,6 @@ io.on("connection", async (socket) => {
 
 
      socket.on("new message", async (data) => {
-
-          console.log(data);
 
           let conversation = await Conversation.findOne({
                "$or": [
